@@ -4,41 +4,37 @@
  */
 
 function findWord(text, matrix) {
-  const reversedArrayText = text.split("").reverse();
-  const reversedText = reversedArrayText.join();
-  const width = matrix[0].length;
-  const height = matrix.length;
-  const length = text.length;
+  var width = matrix[0].length;
+  var height = matrix.length;
+  var length = text.length;
 
-  // check horizontal case
-  if (length <= width) {
-    for (let i = 0; i < height; i++) {
-      if (matrix[i].includes(text) || matrix[i].includes(reversedText)) {
+  var matchedHD = 0; // horizontal direct
+  var matchedHR = 0; // horizontal reverse
+  var matchedVD = 0; // vertical direct
+  var matchedVR = 0; // vertical reverse
+
+  var i, j;
+
+  for (j = 0; j < height; j++) {
+    for (i = 0; i < width; i++) {
+      matchedHD = matrix[j][i] === text[matchedHD] ? matchedHD + 1 : 0;
+      matchedHR =
+        matrix[j][i] === text[length - 1 - matchedHR] ? matchedHR + 1 : 0;
+
+      if (matchedHD === length || matchedHR === length) {
         return true;
       }
     }
   }
 
-  // check vertical case
-  if (length <= height) {
-    for (let j = 0; j < width; j++) {
-      let directMatchLength = 0;
-      let reversedMatchLength = 0;
+  for (i = 0; i < width; i++) {
+    for (j = 0; j < height; j++) {
+      matchedVD = matrix[j][i] === text[matchedVD] ? matchedVD + 1 : 0;
+      matchedVR =
+        matrix[j][i] === text[length - 1 - matchedVR] ? matchedVR + 1 : 0;
 
-      for (let i = 0; i < height; i++) {
-        reversedMatchLength =
-          matrix[i][j] === reversedArrayText[reversedMatchLength]
-            ? reversedMatchLength + 1
-            : 0;
-        directMatchLength =
-          matrix[i][j] ===
-          reversedArrayText[reversedArrayText.length - directMatchLength - 1]
-            ? directMatchLength + 1
-            : 0;
-
-        if (directMatchLength === length || reversedMatchLength === length) {
-          return true;
-        }
+      if (matchedVD === length || matchedVR === length) {
+        return true;
       }
     }
   }
