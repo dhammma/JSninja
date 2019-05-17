@@ -8,14 +8,16 @@ function findWord(text, matrix) {
   var height = matrix.length;
   var length = text.length;
 
-  var matchedHD = 0; // horizontal direct
-  var matchedHR = 0; // horizontal reverse
-  var matchedVD = 0; // vertical direct
-  var matchedVR = 0; // vertical reverse
+  var matchedHD; // horizontal direct
+  var matchedHR; // horizontal reverse
+  var matchedVD; // vertical direct
+  var matchedVR; // vertical reverse
 
   var i, j;
 
   for (j = 0; j < height; j++) {
+    matchedHD = 0;
+    matchedHR = 0;
     for (i = 0; i < width; i++) {
       matchedHD = matrix[j][i] === text[matchedHD] ? matchedHD + 1 : 0;
       matchedHR =
@@ -28,6 +30,8 @@ function findWord(text, matrix) {
   }
 
   for (i = 0; i < width; i++) {
+    matchedVD = 0;
+    matchedVR = 0;
     for (j = 0; j < height; j++) {
       matchedVD = matrix[j][i] === text[matchedVD] ? matchedVD + 1 : 0;
       matchedVR =
