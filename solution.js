@@ -19,9 +19,14 @@ function findWord(text, matrix) {
     matchedHD = 0;
     matchedHR = 0;
     for (i = 0; i < width; i++) {
-      matchedHD = matrix[j][i] === text[matchedHD] ? matchedHD + 1 : 0;
+      matchedHD =
+        matrix[j][i] === text[matchedHD]
+          ? matchedHD + 1
+          : Number(matrix[j][i] === text[0]);
       matchedHR =
-        matrix[j][i] === text[length - 1 - matchedHR] ? matchedHR + 1 : 0;
+        matrix[j][i] === text[length - 1 - matchedHR]
+          ? matchedHR + 1
+          : Number(matrix[j][i] === text[text.length - 1]);
 
       if (matchedHD === length || matchedHR === length) {
         return true;
@@ -33,9 +38,14 @@ function findWord(text, matrix) {
     matchedVD = 0;
     matchedVR = 0;
     for (j = 0; j < height; j++) {
-      matchedVD = matrix[j][i] === text[matchedVD] ? matchedVD + 1 : 0;
+      matchedVD =
+        matrix[j][i] === text[matchedHD]
+          ? matchedHD + 1
+          : Number(matrix[j][i] === text[0]);
       matchedVR =
-        matrix[j][i] === text[length - 1 - matchedVR] ? matchedVR + 1 : 0;
+        matrix[j][i] === text[length - 1 - matchedVR]
+          ? matchedHR + 1
+          : Number(matrix[j][i] === text[text.length - 1]);
 
       if (matchedVD === length || matchedVR === length) {
         return true;
